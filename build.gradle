@@ -5,6 +5,12 @@ plugins {
     id "edu.wpi.first.GradleRIO" version "2025.3.2"
 }
 
+repositories {
+    maven {
+        url new File(project.projectDir,'localCache').toURI()
+    }
+}
+
 java {
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
@@ -148,4 +154,15 @@ spotlessCheck.mustRunAfter(compileJava);
 
 javadoc {
     options.links("https://github.wpilib.org/allwpilib/docs/release/java/")
+}
+
+tasks.register('cacheToMavenLocal', Copy) {
+    from new File(gradle.gradleUserHomeDir, 'caches/modules-2/files-2.1')
+    into new File(project.projectDir,'localCache')
+    eachFile {
+        List<String> parts = it.path.split('/')
+        it.path = parts[0].replace('.','/') + '/' + parts[1] + '/' + parts[2] + '/' + parts[4]
+    }
+    includeEmptyDirs false
+    duplicatesStrategy 'exclude'
 }

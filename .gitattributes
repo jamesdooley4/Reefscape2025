@@ -2,3 +2,5 @@
 * text=auto
 src/main/deploy/choreo/** linguist-generated
 src/main/deploy/pathplanner/** linguist-generated
+*.jar filter=lfs diff=lfs merge=lfs -text
+*.zip filter=lfs diff=lfs merge=lfs -text

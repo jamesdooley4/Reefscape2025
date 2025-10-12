@@ -2,6 +2,9 @@ import org.gradle.internal.os.OperatingSystem
 
 pluginManagement {
     repositories {
+        maven {
+            url new File(settingsDir,'localCache').toURI()
+        }
         mavenLocal()
         gradlePluginPortal()
         String frcYear = '2025'
