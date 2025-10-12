@@ -1,0 +1,16 @@
+def localRepo = new File("C:/Users/Robototes/Reefscape2025/localCache")
+
+allprojects {
+    buildscript {
+        repositories {
+            maven {
+                url localRepo.toURI().toURL()
+            }
+        }
+    }
+    repositories {
+        maven {
+            url localRepo.toURI().toURL()
+        }
+    }
+}
